@@ -1,5 +1,7 @@
 var filterOnlyStar = false;
 var filterOnlyTodo = false;
+var finishCnt = 0;
+var todoCnt = 0;
 
 function removeByValue(arr, value) {
     for (var i = 0; i < arr.length; i++) {
@@ -225,7 +227,6 @@ function createNew() {
             content: newContent,
             finish: false,
             star: false,
-            createTime: getFullTime()
         }
         ls.setItem("number", curNumber);
         ls.setItem("array", JSON.stringify(arr));
@@ -243,8 +244,7 @@ function createNew() {
 function fetchStar(star) {
     var ls = window.localStorage;
     var arrStr = ls.getItem("array");
-    if (!arrStr && typeof(arrStr)!="undefined" && arrStr!=0)
-    {
+    if (!arrStr && typeof (arrStr) != "undefined" && arrStr != 0) {
         initLocalStorage();
         arrStr = ls.getItem("array");
     }
@@ -258,6 +258,11 @@ function fetchStar(star) {
         }
         if (!filterOnlyTodo || !item.finish) {
             createNewItemNode(item);
+            if (item.finish) {
+                finishCnt++;
+            } else {
+                todoCnt++;
+            }
         }
     }
 }
@@ -271,10 +276,14 @@ function fetchAll() {
     } else {
         document.getElementById("finishArea").setAttribute("style", "display: block");
     }
+    finishCnt = 0;
+    todoCnt = 0;
     fetchStar(true);
     if (!filterOnlyStar) {
         fetchStar(false);
     }
+    document.getElementById("totalTodo").innerText = "TODO (" + todoCnt + ")";
+    document.getElementById("totalFinish").innerText = "FINISHED (" + finishCnt + ")";
 }
 
 // 重新调整元素位置和大小

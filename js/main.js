@@ -257,7 +257,12 @@ function createNew() {
 
 function fetchStar(star) {
     var ls = window.localStorage;
-    var arrStr = ls.getItem("array") | forceInit();
+    var arrStr = ls.getItem("array");
+    if (!arrStr && typeof(arrStr)!="undefined" && arrStr!=0)
+    {
+        initLocalStorage();
+        arrStr = ls.getItem("array");
+    }
     var arr = JSON.parse(arrStr);
     // console.log(arr);
     for (var i = arr.length - 1; i >= 0; i--) {
@@ -324,10 +329,9 @@ function hideNew() {
     }, 20);
 }
 
-function forceInit() {
+function initLocalStorage() {
     window.localStorage.setItem("number", 0);
     window.localStorage.setItem("array", JSON.stringify([]));
-    return "";
 }
 
 window.onload = function () {

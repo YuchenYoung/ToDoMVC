@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/main.js"></script>
+    <title>TodoMVC</title>
+</head>
+
+<body>
+    <div class="top-area">
+        <div class="nav-bar" id="navBar">
+            <span class="page-title">TodoMVC</span>
+            <button id="addNew">
+                <img id="iconAdd" src="img/icon/icon-add.png" style="display: block;" onclick="showNew()">
+                <img id="iconMinus" src="img/icon/icon-minus.png" style="display: none;" onclick="hideNew()">
+            </button>
+        </div>
+        <div class="ani-block" id="addArea">
+            <input type="text" id="inputNew">
+            <button class="btn btn-success" id="btnNew" onclick="createNew()">添加</button>
+        </div>
+    </div>
+    <div id="formDiv"></div>
+    <div id="filterArea">
+        <label>
+            <span>只显示：</span>
+            <input type="checkbox" name="filterStar" onchange="filterChange()">
+            <span> 星标</span>&nbsp;&nbsp;&nbsp;
+            <input type="checkbox" name="filterFinish" onchange="filterChange()">
+            <span> 待办</span>
+        </label>
+    </div>
+    <div id="todoArea">
+        <div class="total">
+            <span id="totalTodo">TODO</span>
+            <a href="javascript:deleteAll(false)">删除全部</a>
+            <a href="javascript:finishAll()">完成全部</a>
+        </div>
+        <ul id="ulTodo">
+
+        </ul>
+    </div>
+    <div id="finishArea" style="display: block;">
+        <div class="total">
+            <span>FINISHED</span>
+            <a href="javascript:deleteAll(true)">删除全部</a>
+            <a href="javascript:undoAll()">取消全部</a>
+        </div>
+        <ul id="ulFinish">
+
+        </ul>
+    </div>
+</body>
+
+</html>

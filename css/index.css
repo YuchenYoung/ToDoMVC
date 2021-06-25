@@ -1,0 +1,220 @@
+body {
+    margin: 0;
+    background-color: rgba(248, 248, 245, 0.932);
+}
+
+.top-area {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+}
+
+.nav-bar {
+    background-color: rgb(124, 78, 122);
+    width: 100%;
+    height: 5rem;
+    position: fixed;
+}
+
+.page-title {
+    color: rgba(255, 255, 255, 1);
+    font-size: 1.8rem;
+    margin-top: 1.1rem;
+    margin-left: 0.8rem;
+    display: inline-block;
+    font-family: 'MV Boli';
+}
+
+#addNew {
+    float: right;
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-top: 1.3rem;
+    margin-right: 1.2rem;
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(54, 19, 53, 0.678);
+    padding: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#addNew > img {
+    width: 100%;
+    height: 100%;
+}
+
+#addArea {
+    width: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
+    background-color: rgb(231, 231, 221);
+    text-align: center;
+}
+
+.ani-block {
+    top: 5rem;
+    position: fixed;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .5s;
+}
+
+.ani-block-transition {
+    max-height: 500px;
+}
+
+#inputNew {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    height: 2rem;
+    width: 97%;
+    padding: 4px;
+    border-radius: 4px;
+    border: 1px solid #979795;
+    font-size: 1rem;
+}
+
+.btn {
+    width: 6rem;
+    height: 2.4rem;
+    padding: 8px 2px 8px;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+
+}
+
+#btnNew {
+    margin-top: 0.2rem; 
+    margin-bottom: 1rem;
+}
+
+#formDiv {
+    width: 100%;
+    height: 1px;
+}
+
+#filterArea {
+    margin-top: 1.3rem;
+    text-align: center;
+}
+
+/* #filterArea > label {
+    margin-left: 0.5rem;
+} */
+
+#filterArea > label > input[type="checkbox"] {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    position: relative;
+}
+
+#filterArea > label > span {
+    font-size: 1.2rem;
+}
+
+#todoArea {
+    margin-top: 1.5rem;
+}
+
+ul {
+    padding: 0;
+    list-style: none;
+}
+
+li {
+    margin: 0 auto;
+    width: 100%;
+    height: 3rem;
+    background-color: rgba(253, 253, 253, 1);
+    position: relative;
+}
+
+
+.item {
+    border-bottom: 1px solid #979795;
+    box-sizing: border-box;
+}
+
+.item-first {
+    border-top: 1px solid #979795;
+}
+
+.total {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    padding: 0 0.3rem;
+}
+
+.total > span {
+    margin-left: 0.3rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family:'Palatino Linotype';
+}
+
+.total > a {
+    text-decoration: none;
+    margin-top: 0.3rem;
+    margin-left: 1.0rem;
+    float: right;
+}
+
+.btn-item {
+    margin-top: 0.7rem;
+    height: 1.6rem;
+    width: 8%;
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    display: inline-block;
+}
+
+.btn-item > img {
+    height: 100%;
+    width: auto;
+    margin-left: 0.4rem;
+}
+
+.btn-item-hid {
+    display: hidden;
+}
+
+.btn-item-right {
+    float: right;
+    margin-right: 0.4rem;
+}
+
+.item-content {
+    position: absolute;
+    margin-top: 0.6rem;
+    margin-left: 0.6rem;
+    height: 2rem;
+    width: 60%;
+    display: inline-block;
+    font-size: 1.2rem;
+}
+
+.item-content > input {
+    width: 100%;
+    font-size: 1.2rem;
+    border: 1px solid rgba(95, 95, 92, 0.8);
+}
+
+.item-content > span {
+    width: 100%;
+    font-size: 1.2rem;
+}
+
+.del-text {
+    text-decoration: line-through;
+    color: rgba(87, 87, 82, 0.767);
+}

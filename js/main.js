@@ -11,29 +11,14 @@ function removeByValue(arr, value) {
     return arr;
 }
 
-function getFullTime() {
-    var curDate = new Date();
-    var dateArr = [curDate.getFullYear(), 1 + curDate.getMonth(), curDate.getDate()]
-    var timeArr = [curDate.getHours(), curDate.getMinutes(), curDate.getSeconds()]
-    for (var i = 0; i < 3; i++) {
-        if (dateArr[i] < 10) {
-            dateArr[i] = '0' + dateArr[i];
-        }
-    }
-    for (var i = 0; i < 3; i++) {
-        if (timeArr[i] < 10) {
-            timeArr[i] = '0' + timeArr[i];
-        }
-    }
-    return dateArr.join('-') + " " + timeArr.join(':');
-}
-
+// 筛选条件
 function filterChange() {
     filterOnlyStar = document.getElementsByName("filterStar")[0].checked;
     filterOnlyTodo = document.getElementsByName("filterFinish")[0].checked;
     fetchAll();
 }
 
+// 创建新的活动节点
 function createNewItemNode(item) {
     var node = document.createElement("li");
     var id = item.id;
@@ -90,6 +75,7 @@ function createNewItemNode(item) {
         spanContent.setAttribute("onclick", "editBegin('" + id + "')");
     }
     divContent.appendChild(spanContent);
+    // 初始时输入框为隐藏状态
     var inputContent = document.createElement("input");
     inputContent.setAttribute("id", "edit" + id);
     inputContent.setAttribute("type", "text");
@@ -98,14 +84,6 @@ function createNewItemNode(item) {
     inputContent.setAttribute("onBlur", "editFinish('" + id + "')");
     divContent.appendChild(inputContent);
     node.appendChild(divContent);
-    // append detail button
-    var btnDetail = document.createElement("button");
-    btnDetail.setAttribute("class", "btn-item btn-item-right");
-    // btnDetail.setAttribute("onclick", "detail('"+id+"')")
-    // var imageDetail = document.createElement("img");
-    // imageDetail.setAttribute("src", "img/icon/icon-detail.png");
-    // btnDetail.appendChild(imageDetail);
-    // node.appendChild(btnDetail);
     // append delete button
     var btnDelete = document.createElement("button");
     btnDelete.setAttribute("class", "btn-item btn-item-right");
@@ -122,22 +100,21 @@ function createNewItemNode(item) {
     }
 }
 
+// 完成全部待办或取消全部完成
 function changeAllFinishState(state) {
     var ls = window.localStorage;
     var arrStr = ls.getItem("array");
     var arr = JSON.parse(arrStr);
     for (var i = 0; i < arr.length; i++) {
         var item = JSON.parse(ls.getItem("item" + arr[i]));
-        // console.log(item);
         item.finish = state;
         ls.setItem("item" + arr[i], JSON.stringify(item));
     }
     fetchAll();
 }
 
-
+// 星标某个活动
 function star(id) {
-    // console.log("star" + id);
     var ls = window.localStorage;
     var item = JSON.parse(ls.getItem("item" + id));
     item.star = true;
@@ -145,8 +122,8 @@ function star(id) {
     fetchAll();
 }
 
+// 取消星标某个活动
 function unstar(id) {
-    // console.log("unstar" + id);
     var ls = window.localStorage;
     var item = JSON.parse(ls.getItem("item" + id));
     item.star = false;
@@ -154,8 +131,8 @@ function unstar(id) {
     fetchAll();
 }
 
+// 完成某个活动
 function finish(id) {
-    // console.log("finish" + id);
     var ls = window.localStorage;
     var item = JSON.parse(ls.getItem("item" + id));
     item.finish = true;
@@ -163,8 +140,8 @@ function finish(id) {
     fetchAll();
 }
 
+// 取消完成某个活动
 function unfinish(id) {
-    // console.log("unfinish" + id);
     var ls = window.localStorage;
     var item = JSON.parse(ls.getItem("item" + id));
     item.finish = false;
@@ -172,19 +149,18 @@ function unfinish(id) {
     fetchAll();
 }
 
+// 删除某个活动
 function deleteItem(id) {
-    // console.log("delete" + id);
     var ls = window.localStorage;
     ls.setItem("item" + id, JSON.stringify({}));
     var arr = JSON.parse(ls.getItem("array"));
     arr = removeByValue(arr, id);
-    // console.log(arr);
     ls.setItem("array", JSON.stringify(arr));
     fetchAll();
 }
 
+// 开始编辑，展示输入框
 function editBegin(id) {
-    // console.log("edit" + id);
     var textOld = document.getElementById("text" + id).innerText;
     document.getElementById("edit" + id).setAttribute("value", textOld);
     document.getElementById("text" + id).setAttribute("style", "display: none");
@@ -192,8 +168,8 @@ function editBegin(id) {
     document.getElementById("edit" + id).focus();
 }
 
+// 结束编辑，隐藏输入框，并修改存储
 function editFinish(id) {
-    // console.log("finEdit" + id);
     var textNew = document.getElementById("edit" + id).value;
     if (textNew.trim().length > 0 && textNew.trim().length <= 12) {
         var ls = window.localStorage;
@@ -210,21 +186,20 @@ function editFinish(id) {
     document.getElementById("text" + id).setAttribute("style", "display: block");
 }
 
+// 完成全部
 function finishAll() {
-    // console.log("all finish");
     changeAllFinishState(true);
 }
 
+// 取消完成全部
 function undoAll() {
-    // console.log("all undo");
     changeAllFinishState(false);
 }
 
+// 删除全部
 function deleteAll(finish) {
-    // console.log("all delete " + finish);
     var ulID = finish ? "ulFinish" : "ulTodo";
     var nodes = document.getElementById(ulID).getElementsByTagName("li");
-    // console.log(nodes);
     var ls = window.localStorage;
     var arr = JSON.parse(ls.getItem("array"));
     for (var i = 0; i < nodes.length; i++) {
@@ -235,9 +210,9 @@ function deleteAll(finish) {
     fetchAll();
 }
 
+// 新建活动
 function createNew() {
     var newContent = document.getElementById("inputNew").value;
-    console.log(newContent.trim().length);
     if (newContent.trim().length > 0 && newContent.trim().length <= 12) {
         var ls = window.localStorage;
         var curNumber = ls.getItem("number");
@@ -264,6 +239,7 @@ function createNew() {
     document.getElementById("inputNew").value = "";
 }
 
+// 根据星标获取全部活动
 function fetchStar(star) {
     var ls = window.localStorage;
     var arrStr = ls.getItem("array");
@@ -273,7 +249,6 @@ function fetchStar(star) {
         arrStr = ls.getItem("array");
     }
     var arr = JSON.parse(arrStr);
-    // console.log(arr);
     for (var i = arr.length - 1; i >= 0; i--) {
         var it = arr[i];
         var itemStr = ls.getItem("item" + it);
@@ -287,6 +262,7 @@ function fetchStar(star) {
     }
 }
 
+// 获取全部活动
 function fetchAll() {
     document.getElementById("ulFinish").innerHTML = "";
     document.getElementById("ulTodo").innerHTML = "";
@@ -301,6 +277,7 @@ function fetchAll() {
     }
 }
 
+// 重新调整元素位置和大小
 function reformSize() {
     var navHeight = document.getElementById("navBar").clientHeight;
     var inputHeight = document.getElementById("addArea").clientHeight;
@@ -308,8 +285,8 @@ function reformSize() {
     document.getElementById("formDiv").setAttribute("style", "margin-top: " + topHeight + "px")
 }
 
+// 展示新增界面
 function showNew() {
-    // console.log("show");
     document.getElementById("iconAdd").setAttribute("style", "display: none");
     document.getElementById("iconMinus").setAttribute("style", "display: block");
     document.getElementById("addArea").setAttribute("class", "ani-block ani-block-transition");
@@ -323,8 +300,8 @@ function showNew() {
     }, 20);
 }
 
+// 隐藏新增界面
 function hideNew() {
-    // console.log("hide");
     document.getElementById("iconAdd").setAttribute("style", "display: block");
     document.getElementById("iconMinus").setAttribute("style", "display: none");
     document.getElementById("addArea").setAttribute("class", "ani-block");
@@ -338,13 +315,13 @@ function hideNew() {
     }, 20);
 }
 
+// 第一次执行程序初始化 localStorage
 function initLocalStorage() {
     window.localStorage.setItem("number", 0);
     window.localStorage.setItem("array", JSON.stringify([]));
 }
 
 window.onload = function () {
-    // forceInit();
     reformSize();
     fetchAll();
 }

@@ -1,3 +1,4 @@
+// 添加信息弹窗
 function messageBox(str, displayTime) {
     var box = document.createElement("div");
     box.setAttribute("class", "message-box");
@@ -11,6 +12,7 @@ function messageBox(str, displayTime) {
     setTimeout("clearBox()", displayTime);
 }
 
+// 删除信息弹窗，并重置其余弹窗的位置
 function clearBox() {
     document.body.removeChild(document.querySelectorAll(".message-box")[0]);
     var boxList = document.querySelectorAll(".message-box");

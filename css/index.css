@@ -124,10 +124,6 @@ body {
     text-align: center;
 }
 
-/* #filterArea > label {
-    margin-left: 0.5rem;
-} */
-
 #filterArea > label > input[type="checkbox"] {
     cursor: pointer;
     width: 16px;

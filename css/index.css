@@ -3,6 +3,24 @@ body {
     background-color: rgba(248, 248, 245, 0.932);
 }
 
+.message-box {
+    z-index: 20;
+    position: fixed;
+    width: 70%;
+    left: 15%;
+    height: 3rem;
+    top: 4%;
+    border-radius: 10px;
+    background-color: rgba(100, 43, 43, 0.85);
+    padding-top: 0.8rem;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.message-box > span {
+    color: rgb(216, 152, 152);
+}
+
 .top-area {
     position: fixed;
     z-index: 10;

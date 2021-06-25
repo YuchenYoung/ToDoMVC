@@ -195,12 +195,16 @@ function editBegin(id) {
 function editFinish(id) {
     // console.log("finEdit" + id);
     var textNew = document.getElementById("edit" + id).value;
-    if (textNew.trim().length > 0) {
+    if (textNew.trim().length > 0 && textNew.trim().length <= 12) {
         var ls = window.localStorage;
         var item = JSON.parse(ls.getItem("item" + id));
         item.content = textNew;
         ls.setItem("item" + id, JSON.stringify(item));
         document.getElementById("text" + id).innerText = textNew;
+    } else if (textNew.trim().length <= 0) {
+        messageBox("活动内容不能为空！", 5000);
+    } else {
+        messageBox("活动内容不能超过12个字符！", 5000);
     }
     document.getElementById("edit" + id).setAttribute("style", "display: none");
     document.getElementById("text" + id).setAttribute("style", "display: block");
@@ -233,7 +237,8 @@ function deleteAll(finish) {
 
 function createNew() {
     var newContent = document.getElementById("inputNew").value;
-    if (newContent.trim().length > 0) {
+    console.log(newContent.trim().length);
+    if (newContent.trim().length > 0 && newContent.trim().length <= 12) {
         var ls = window.localStorage;
         var curNumber = ls.getItem("number");
         curNumber = 1 + parseInt(curNumber)
@@ -251,6 +256,10 @@ function createNew() {
         ls.setItem("array", JSON.stringify(arr));
         ls.setItem("item" + curNumber, JSON.stringify(item));
         fetchAll();
+    } else if (newContent.trim().length <= 0) {
+        messageBox("活动内容不能为空！", 5000);
+    } else {
+        messageBox("活动内容不能超过12个字符！", 5000);
     }
     document.getElementById("inputNew").value = "";
 }

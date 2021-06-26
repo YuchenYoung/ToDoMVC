@@ -164,7 +164,7 @@ function deleteItem(id) {
 // 开始编辑，展示输入框
 function editBegin(id) {
     var textOld = document.getElementById("text" + id).innerText;
-    document.getElementById("edit" + id).setAttribute("value", textOld);
+    document.getElementById("edit" + id).value = textOld;
     document.getElementById("text" + id).setAttribute("style", "display: none");
     document.getElementById("edit" + id).setAttribute("style", "display: block");
     document.getElementById("edit" + id).focus();
